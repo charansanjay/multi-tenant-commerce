@@ -1,0 +1,49 @@
+# Node + pnpm
+node_modules/
+.pnpm-store/
+
+# pnpm lockfile
+pnpm-lock.yaml
+
+# Turborepo cache (root + app-level)
+.turbo/
+**/.turbo/
+
+# Vite build outputs
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Next.js build outputs (if you add Next apps later)
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor/IDE files
+**/.vscode/
+!.vscode/extensions.json
+**/.obsidian/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/

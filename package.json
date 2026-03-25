@@ -4,12 +4,25 @@
   "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "turbo dev",
+    "dev:admin": "turbo dev --filter=@platform/admin",
+    "dev:web": "turbo dev --filter=@platform/web",
+    "dev:super-admin": "turbo dev --filter=@platform/super-admin",
     "build": "turbo build",
+    "build:admin": "turbo build --filter=@platform/admin",
+    "build:web": "turbo build --filter=@platform/web",
+    "build:super-admin": "turbo build --filter=@platform/super-admin",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "test": "turbo test"
+    "test": "turbo test",
+    "test:admin": "turbo test --filter=@platform/admin",
+    "test:web": "turbo test --filter=@platform/web",
+    "test:super-admin": "turbo test --filter=@platform/super-admin"
   },
   "devDependencies": {
+    "eslint": "^9.39.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.1",
     "turbo": "^2.8.20",
     "typescript": "^6.0.2"
   }

@@ -10,20 +10,49 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@platform/types": "workspace:*",
+    "@platform/ui": "workspace:*",
+    "@platform/utils": "workspace:*",
+    "@react-pdf/renderer": "^4.3.2",
+    "@supabase/ssr": "^0.9.0",
+    "@supabase/supabase-js": "^2.100.0",
+    "@tanstack/react-query": "^5.95.2",
+    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-virtual": "^3.13.23",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^1.7.0",
     "next": "16.2.1",
+    "next-intl": "^4.8.3",
+    "papaparse": "^5.5.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "@platform/ui": "workspace:*",
-    "@platform/types": "workspace:*",
-    "@platform/utils": "workspace:*"
+    "react-dropzone": "^15.0.0",
+    "react-hook-form": "^7.72.0",
+    "recharts": "^3.8.1",
+    "sonner": "^2.0.7",
+    "tailwindcss": "^4.2.2",
+    "xlsx": "^0.18.5",
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.1",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
-    "typescript": "^5"
+    "jsdom": "^29.0.1",
+    "supabase": "^2.84.4",
+    "typescript": "^5",
+    "vitest": "^4.1.1"
   }
 }

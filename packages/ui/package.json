@@ -11,5 +11,10 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint src/"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "react": "19.2.4",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
+  }
 }

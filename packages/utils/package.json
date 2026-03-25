@@ -11,5 +11,11 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint src/"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
+  }
 }

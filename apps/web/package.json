@@ -1,0 +1,11 @@
+{
+  "name": "@platform/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'apps/web is not yet implemented'",
+    "build": "echo 'apps/web is not yet implemented'",
+    "lint": "echo 'apps/web is not yet implemented'",
+    "type-check": "echo 'apps/web is not yet implemented'"
+  }
+}

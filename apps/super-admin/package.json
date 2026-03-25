@@ -1,0 +1,11 @@
+{
+  "name": "@platform/super-admin",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'apps/super-admin is not yet implemented'",
+    "build": "echo 'apps/super-admin is not yet implemented'",
+    "lint": "echo 'apps/super-admin is not yet implemented'",
+    "type-check": "echo 'apps/super-admin is not yet implemented'"
+  }
+}

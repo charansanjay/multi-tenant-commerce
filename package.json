@@ -22,9 +22,12 @@
     "test:admin": "turbo test --filter=@platform/admin",
     "test:web": "turbo test --filter=@platform/web",
     "test:super-admin": "turbo test --filter=@platform/super-admin",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@eslint/js": "^10.0.1",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -36,5 +39,18 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "turbo": "^2.8.20",
     "typescript": "^6.0.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css}": [
+      "prettier --write"
+    ]
   }
 }

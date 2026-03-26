@@ -23,7 +23,14 @@
     "test:web": "turbo test --filter=@platform/web",
     "test:super-admin": "turbo test --filter=@platform/super-admin",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:status": "supabase status",
+    "db:migrate": "supabase migration new",
+    "db:push": "supabase db push",
+    "db:types": "supabase gen types typescript --local > apps/admin/src/types/database.types.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",

@@ -1,0 +1,13 @@
+{
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "loading": "Laden...",
+    "noResults": "Keine Ergebnisse"
+  },
+  "orders": {},
+  "customers": {},
+  "catalog": {}
+}

@@ -33,6 +33,11 @@ pnpm-debug.log*
 .env.local
 .env.*.local
 
+# Supabase
+supabase/.branches
+supabase/.temp
+supabase/functions/.deploy
+
 # Editor/IDE files
 **/.vscode/
 !.vscode/extensions.json

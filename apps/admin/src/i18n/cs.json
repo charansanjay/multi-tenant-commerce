@@ -1,0 +1,13 @@
+{
+  "common": {
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "edit": "Upravit",
+    "loading": "Načítání...",
+    "noResults": "Žádné výsledky"
+  },
+  "orders": {},
+  "customers": {},
+  "catalog": {}
+}

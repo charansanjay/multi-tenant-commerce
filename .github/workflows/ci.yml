@@ -8,7 +8,7 @@ on:
 
 env:
   NODE_VERSION: "24.6.0"
-  PNPM_VERSION: "10.x"
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   # ─────────────────────────────────────────
@@ -24,8 +24,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -52,6 +50,7 @@ jobs:
           name: coverage-report
           path: apps/admin/coverage/
           retention-days: 7
+          if-no-files-found: ignore
 
   # ─────────────────────────────────────────
   # Job 2 — E2E Tests (runs after Job 1)
@@ -67,8 +66,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -109,3 +106,4 @@ jobs:
           name: playwright-report
           path: apps/admin/playwright-report/
           retention-days: 7
+          if-no-files-found: ignore

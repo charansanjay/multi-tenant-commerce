@@ -56,6 +56,20 @@ export default [
     },
   },
 
+  // Next.js special files — allow non-component exports
+  {
+    files: [
+      'apps/admin/app/**/layout.tsx',
+      'apps/admin/app/**/page.tsx',
+      'apps/admin/app/**/error.tsx',
+      'apps/admin/app/**/not-found.tsx',
+      'apps/admin/app/**/loading.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+
   // Vitest globals for test files
   {
     files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],

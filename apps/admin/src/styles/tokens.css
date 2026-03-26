@@ -1,0 +1,284 @@
+@layer base {
+  :root {
+    /* Background */
+    --background: 255 255 255; /* #FFFFFF — main page background */
+    --background-subtle: 249 248 247; /* #F9F8F7 — warm off-white, sidebar bg */
+    --background-muted: 243 242 240; /* #F3F2F0 — table row hover, input bg */
+
+    /* Surface (cards, modals, overlays) */
+    --surface: 255 255 255;
+    --surface-raised: 249 248 247; /* cards slightly elevated */
+    --surface-overlay: 255 255 255; /* modals, dropdowns */
+
+    /* Border */
+    --border: 229 227 224; /* warm gray-200 — default borders */
+    --border-strong: 209 206 202; /* warm gray-300 — stronger separation */
+
+    /* Text */
+    --foreground: 28 25 23; /* warm near-black — primary text */
+    --foreground-muted: 87 83 78; /* warm gray-600 — secondary text */
+    --foreground-subtle: 120 113 108; /* warm gray-500 — placeholder, meta */
+    --foreground-disabled: 168 162 158; /* warm gray-400 — disabled state text */
+
+    /* Primary — blue-700 (#1D4ED8) */
+    --primary: 29 78 216;
+    --primary-hover: 30 64 175; /* blue-800 — hover state */
+    --primary-subtle: 219 234 254; /* blue-100 — backgrounds, highlights */
+    --primary-foreground: 255 255 255; /* text on primary bg */
+
+    /* Secondary */
+
+    --secondary: 243 242 240;
+    --secondary-hover: 229 227 224;
+    --secondary-foreground: 28 25 23;
+
+    /* Destructive — red-600 */
+    --destructive: 220 38 38;
+    --destructive-hover: 185 28 28; /* red-700 */
+    --destructive-subtle: 254 226 226; /* red-100 */
+    --destructive-foreground: 255 255 255;
+
+    /* Semantic — Success */
+    --success: 22 163 74; /* green-600 */
+    --success-subtle: 220 252 231; /* green-100 */
+    --success-foreground: 20 83 45; /* green-900 */
+
+    /* Semantic — Warning */
+    --warning: 217 119 6; /* amber-600 */
+    --warning-subtle: 254 243 199; /* amber-100 */
+    --warning-foreground: 120 53 15; /* amber-900 */
+
+    /* Semantic — Info */
+    --info: 29 78 216; /* same as primary */
+    --info-subtle: 219 234 254; /* blue-100 */
+    --info-foreground: 30 58 138; /* blue-900 */
+
+    /* Muted */
+    --muted: 243 242 240;
+    --muted-foreground: 120 113 108;
+
+    /* Focus ring */
+    --ring: 29 78 216;
+    --ring-offset: 255 255 255;
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-raw-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-raw-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+    --shadow-raw-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    --shadow-raw-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+
+    /* Typography */
+    --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+    --font-mono: var(--font-geist-mono), 'Fira Code', monospace;
+
+    /* Order status colours */
+    --status-pending-bg: 254 243 199; /* amber-100 */
+    --status-pending-text: 120 53 15; /* amber-900 */
+
+    --status-confirmed-bg: 219 234 254; /* blue-100 */
+    --status-confirmed-text: 30 58 138; /* blue-900 */
+
+    --status-preparing-bg: 237 233 254; /* violet-100 */
+    --status-preparing-text: 76 29 149; /* violet-900 */
+
+    --status-ready-bg: 207 250 254; /* cyan-100 */
+    --status-ready-text: 22 78 99; /* cyan-900 */
+
+    --status-delivered-bg: 220 252 231; /* green-100 */
+    --status-delivered-text: 20 83 45; /* green-900 */
+
+    --status-cancelled-bg: 254 226 226; /* red-100 */
+    --status-cancelled-text: 127 29 29; /* red-900 */
+
+    /* Payment status colours */
+    --status-paid-bg: 220 252 231; /* green-100 */
+    --status-paid-text: 20 83 45; /* green-900 */
+
+    --status-payment-pending-bg: 254 243 199;
+    --status-payment-pending-text: 120 53 15;
+
+    --status-failed-bg: 254 226 226; /* red-100 */
+    --status-failed-text: 127 29 29; /* red-900 */
+
+    --status-refunded-bg: 241 245 249; /* slate-100 */
+    --status-refunded-text: 30 41 59; /* slate-900 */
+
+    /* Product status colours */
+    --status-active-bg: 220 252 231; /* green-100 */
+    --status-active-text: 20 83 45; /* green-900 */
+
+    --status-inactive-bg: 241 245 249; /* slate-100 */
+    --status-inactive-text: 30 41 59; /* slate-900 */
+
+    --status-out-of-stock-bg: 255 237 213; /* orange-100 */
+    --status-out-of-stock-text: 124 45 18; /* orange-900 */
+  }
+
+  /* Dark mode */
+  .dark {
+    --background: 12 10 9; /* warm near-black */
+    --background-subtle: 28 25 23;
+    --background-muted: 41 37 36;
+
+    --surface: 28 25 23;
+    --surface-raised: 41 37 36;
+    --surface-overlay: 41 37 36;
+
+    --border: 63 57 53;
+    --border-strong: 87 83 78;
+
+    --foreground: 250 250 249; /* warm near-white */
+    --foreground-muted: 168 162 158;
+    --foreground-subtle: 120 113 108;
+    --foreground-disabled: 87 83 78;
+
+    /* Primary lightens in dark mode for readability on dark backgrounds */
+    --primary: 96 165 250; /* blue-400 */
+    --primary-hover: 147 197 253; /* blue-300 */
+    --primary-subtle: 30 58 138; /* blue-900 */
+    --primary-foreground: 12 10 9;
+
+    --secondary: 41 37 36;
+    --secondary-hover: 63 57 53;
+    --secondary-foreground: 250 250 249;
+
+    --destructive: 248 113 113; /* red-400 */
+    --destructive-hover: 252 165 165; /* red-300 */
+    --destructive-subtle: 127 29 29; /* red-900 */
+    --destructive-foreground: 12 10 9;
+
+    --success: 74 222 128; /* green-400 */
+    --success-subtle: 20 83 45; /* green-900 */
+    --success-foreground: 240 253 244;
+
+    --warning: 251 191 36; /* amber-400 */
+    --warning-subtle: 120 53 15; /* amber-900 */
+    --warning-foreground: 255 251 235;
+
+    --info: 96 165 250;
+    --info-subtle: 30 58 138;
+    --info-foreground: 219 234 254;
+
+    --muted: 41 37 36;
+    --muted-foreground: 120 113 108;
+
+    --ring: 96 165 250;
+    --ring-offset: 12 10 9;
+
+    /* Order status colours */
+    --status-pending-bg: 120 53 15; /* amber-900 */
+    --status-pending-text: 254 243 199; /* amber-100 */
+
+    --status-confirmed-bg: 30 58 138; /* blue-900 */
+    --status-confirmed-text: 219 234 254; /* blue-100 */
+
+    --status-preparing-bg: 76 29 149; /* violet-900 */
+    --status-preparing-text: 237 233 254; /* violet-100 */
+
+    --status-ready-bg: 22 78 99; /* cyan-900 */
+    --status-ready-text: 207 250 254; /* cyan-100 */
+
+    --status-delivered-bg: 20 83 45; /* green-900 */
+    --status-delivered-text: 220 252 231; /* green-100 */
+
+    --status-cancelled-bg: 127 29 29; /* red-900 */
+    --status-cancelled-text: 254 226 226; /* red-100 */
+
+    /* Payment status colours */
+    --status-paid-bg: 20 83 45;
+    --status-paid-text: 220 252 231;
+
+    --status-payment-pending-bg: 120 53 15;
+    --status-payment-pending-text: 254 243 199;
+
+    --status-failed-bg: 127 29 29;
+    --status-failed-text: 254 226 226;
+
+    --status-refunded-bg: 30 41 59; /* slate-900 */
+    --status-refunded-text: 241 245 249; /* slate-100 */
+
+    /* Product status colours */
+    --status-active-bg: 20 83 45;
+    --status-active-text: 220 252 231;
+
+    --status-inactive-bg: 30 41 59;
+    --status-inactive-text: 241 245 249;
+
+    --status-out-of-stock-bg: 124 45 18; /* orange-900 */
+    --status-out-of-stock-text: 255 237 213; /* orange-100 */
+  }
+}
+
+@theme {
+  /* Colours */
+  --color-background: rgb(var(--background));
+  --color-background-subtle: rgb(var(--background-subtle));
+  --color-background-muted: rgb(var(--background-muted));
+
+  --color-surface: rgb(var(--surface));
+  --color-surface-raised: rgb(var(--surface-raised));
+  --color-surface-overlay: rgb(var(--surface-overlay));
+
+  --color-border: rgb(var(--border));
+  --color-border-strong: rgb(var(--border-strong));
+
+  --color-foreground: rgb(var(--foreground));
+  --color-foreground-muted: rgb(var(--foreground-muted));
+  --color-foreground-subtle: rgb(var(--foreground-subtle));
+  --color-foreground-disabled: rgb(var(--foreground-disabled));
+
+  --color-primary: rgb(var(--primary));
+  --color-primary-hover: rgb(var(--primary-hover));
+  --color-primary-subtle: rgb(var(--primary-subtle));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-hover: rgb(var(--secondary-hover));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+
+  --color-destructive: rgb(var(--destructive));
+  --color-destructive-hover: rgb(var(--destructive-hover));
+  --color-destructive-subtle: rgb(var(--destructive-subtle));
+  --color-destructive-foreground: rgb(var(--destructive-foreground));
+
+  --color-success: rgb(var(--success));
+  --color-success-subtle: rgb(var(--success-subtle));
+  --color-success-foreground: rgb(var(--success-foreground));
+
+  --color-warning: rgb(var(--warning));
+  --color-warning-subtle: rgb(var(--warning-subtle));
+  --color-warning-foreground: rgb(var(--warning-foreground));
+
+  --color-info: rgb(var(--info));
+  --color-info-subtle: rgb(var(--info-subtle));
+  --color-info-foreground: rgb(var(--info-foreground));
+
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+
+  --color-ring: rgb(var(--ring));
+
+  /* Typography */
+  --font-family-sans: var(--font-sans);
+  --font-family-mono: var(--font-mono);
+
+  --font-size-xs: 0.6875rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-lg: 1.0625rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-raw-sm);
+  --shadow-md: var(--shadow-raw-md);
+  --shadow-lg: var(--shadow-raw-lg);
+  --shadow-xl: var(--shadow-raw-xl);
+}

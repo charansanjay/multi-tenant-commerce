@@ -21,7 +21,8 @@
     "test": "turbo test",
     "test:admin": "turbo test --filter=@platform/admin",
     "test:web": "turbo test --filter=@platform/web",
-    "test:super-admin": "turbo test --filter=@platform/super-admin"
+    "test:super-admin": "turbo test --filter=@platform/super-admin",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css}\""
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -32,6 +33,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "turbo": "^2.8.20",
     "typescript": "^6.0.2"
   }

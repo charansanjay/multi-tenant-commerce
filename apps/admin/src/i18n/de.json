@@ -4,10 +4,61 @@
     "cancel": "Abbrechen",
     "delete": "Löschen",
     "edit": "Bearbeiten",
+    "view": "Anzeigen",
+    "create": "Erstellen",
     "loading": "Laden...",
-    "noResults": "Keine Ergebnisse"
+    "noResults": "Keine Ergebnisse",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "export": "Exportieren",
+    "confirm": "Bestätigen",
+    "back": "Zurück",
+    "actions": "Aktionen"
   },
-  "orders": {},
-  "customers": {},
-  "catalog": {}
+  "auth": {
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "customers": "Kunden",
+    "catalog": "Katalog",
+    "categories": "Kategorien",
+    "products": "Produkte",
+    "orders": "Bestellungen",
+    "addresses": "Adressen",
+    "sales": "Umsatz",
+    "settings": "Einstellungen",
+    "auditLogs": "Aktivitätsprotokolle"
+  },
+  "orders": {
+    "title": "Bestellungen",
+    "status": {
+      "pending": "Ausstehend",
+      "confirmed": "Bestätigt",
+      "preparing": "In Vorbereitung",
+      "ready": "Bereit",
+      "delivered": "Geliefert",
+      "cancelled": "Storniert"
+    },
+    "paymentStatus": {
+      "pending": "Ausstehend",
+      "paid": "Bezahlt",
+      "failed": "Fehlgeschlagen",
+      "refunded": "Erstattet"
+    }
+  },
+  "customers": {
+    "title": "Kunden"
+  },
+  "catalog": {
+    "title": "Katalog",
+    "categories": "Kategorien",
+    "products": "Produkte"
+  },
+  "settings": {
+    "title": "Einstellungen"
+  }
 }

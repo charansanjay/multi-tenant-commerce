@@ -4,10 +4,61 @@
     "cancel": "Zrušit",
     "delete": "Smazat",
     "edit": "Upravit",
+    "view": "Zobrazit",
+    "create": "Vytvořit",
     "loading": "Načítání...",
-    "noResults": "Žádné výsledky"
+    "noResults": "Žádné výsledky",
+    "search": "Hledat",
+    "filter": "Filtrovat",
+    "export": "Exportovat",
+    "confirm": "Potvrdit",
+    "back": "Zpět",
+    "actions": "Akce"
   },
-  "orders": {},
-  "customers": {},
-  "catalog": {}
+  "auth": {
+    "signIn": "Přihlásit se",
+    "signOut": "Odhlásit se",
+    "email": "E-mail",
+    "password": "Heslo"
+  },
+  "nav": {
+    "dashboard": "Přehled",
+    "customers": "Zákazníci",
+    "catalog": "Katalog",
+    "categories": "Kategorie",
+    "products": "Produkty",
+    "orders": "Objednávky",
+    "addresses": "Adresy",
+    "sales": "Prodeje",
+    "settings": "Nastavení",
+    "auditLogs": "Záznamy aktivit"
+  },
+  "orders": {
+    "title": "Objednávky",
+    "status": {
+      "pending": "Čeká",
+      "confirmed": "Potvrzeno",
+      "preparing": "Připravuje se",
+      "ready": "Připraveno",
+      "delivered": "Doručeno",
+      "cancelled": "Zrušeno"
+    },
+    "paymentStatus": {
+      "pending": "Čeká",
+      "paid": "Zaplaceno",
+      "failed": "Selhalo",
+      "refunded": "Vráceno"
+    }
+  },
+  "customers": {
+    "title": "Zákazníci"
+  },
+  "catalog": {
+    "title": "Katalog",
+    "categories": "Kategorie",
+    "products": "Produkty"
+  },
+  "settings": {
+    "title": "Nastavení"
+  }
 }

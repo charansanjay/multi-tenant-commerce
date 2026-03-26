@@ -4,10 +4,61 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
+    "view": "View",
+    "create": "Create",
     "loading": "Loading...",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "confirm": "Confirm",
+    "back": "Back",
+    "actions": "Actions"
   },
-  "orders": {},
-  "customers": {},
-  "catalog": {}
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "email": "Email",
+    "password": "Password"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "catalog": "Catalog",
+    "categories": "Categories",
+    "products": "Products",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "sales": "Sales",
+    "settings": "Settings",
+    "auditLogs": "Audit Logs"
+  },
+  "orders": {
+    "title": "Orders",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "paymentStatus": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    }
+  },
+  "customers": {
+    "title": "Customers"
+  },
+  "catalog": {
+    "title": "Catalog",
+    "categories": "Categories",
+    "products": "Products"
+  },
+  "settings": {
+    "title": "Settings"
+  }
 }

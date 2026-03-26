@@ -7,3 +7,9 @@ export const ROLES = {
 } as const;
 
 export type Role = (typeof ROLES)[keyof typeof ROLES];
+
+export const ROLE_ROUTE_MAP: Record<string, Array<Role>> = {
+  '/settings': ['admin'],
+  '/audit-logs': ['admin'],
+  '/sales': ['admin'],
+};

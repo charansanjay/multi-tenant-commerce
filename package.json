@@ -33,13 +33,13 @@
     "test:super-admin": "turbo test --filter=@platform/super-admin",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css}\"",
     "prepare": "husky",
-    "db:start": "pnpm dlx supabase@latest start",
-    "db:stop": "pnpm dlx supabase@latest stop",
-    "db:reset": "pnpm dlx supabase@latest db reset",
-    "db:status": "pnpm dlx supabase@latest status",
-    "db:migrate": "pnpm dlx supabase@latest migration new",
-    "db:push": "pnpm dlx supabase@latest db push",
-    "db:types": "pnpm dlx supabase@latest gen types typescript --local > apps/admin/src/types/database.types.ts"
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:status": "supabase status",
+    "db:migrate": "supabase migration new",
+    "db:push": "supabase db push",
+    "db:types": "supabase gen types typescript --local > apps/admin/src/types/database.types.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
@@ -57,12 +57,12 @@
     "typescript": "^6.0.2"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
+    "!(apps/admin/src/types/database.types.ts)*.{ts,tsx}": [
+      "eslint --fix --no-warn-ignored",
       "prettier --write"
     ],
     "*.{js,jsx}": [
-      "eslint --fix",
+      "eslint --fix --no-warn-ignored",
       "prettier --write"
     ],
     "*.{json,css}": [

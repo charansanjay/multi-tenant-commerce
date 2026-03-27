@@ -3,6 +3,9 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
 const eslintConfig = defineConfig([
+  {
+    ignores: ["src/types/database.types.ts"],
+  },
   ...nextVitals,
   ...nextTs,
   // Override default ignores of eslint-config-next.
@@ -12,6 +15,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "src/types/database.types.ts",
   ]),
 ]);
 

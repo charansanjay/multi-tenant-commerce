@@ -1,313 +1,853 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mockup — Login Page | Module 01 Auth</title>
+  </head>
+  <body>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --font: -apple-system, 'Segoe UI', system-ui, sans-serif;
+        --fs-xs: 13px;
+        --fs-sm: 15px;
+        --fs-base: 17px;
+        --fs-xl: 22px;
+        --fs-2xl: 26px;
+        --bg: #ffffff;
+        --bg-subtle: #f3f4f6;
+        --surface: #ffffff;
+        --border: #e5e7eb;
+        --border-strong: #d1d5db;
+        --fg: #111827;
+        --fg-muted: #4b5563;
+        --fg-subtle: #9ca3af;
+        --primary: #f59e0b;
+        --primary-h: #d97706;
+        --destructive: #dc2626;
+        --success: #15803d;
+        --sidebar-bg: #2a2a36;
+        --sidebar-active-bg: #20202b;
+        --sidebar-accent: #f59e0b;
+        --sidebar-active-text: #fcd34d;
+        /* FIXED: unselected = lighter/visible, hover = the old unselected (dimmer) */
+        --sidebar-item-text: #c8c8d4; /* bright enough to read clearly */
+        --sidebar-item-hover-bg: #20202b;
+        --sidebar-item-hover-text: #e5e5ef;
+        --sidebar-border: #38384a;
+        --sidebar-flyout-bg: #1a1a23;
+        --radius-md: 6px;
+        --radius-lg: 8px;
+      }
+      .dark {
+        --bg: #0f172a;
+        --bg-subtle: #1e293b;
+        --surface: #1e293b;
+        --border: #334155;
+        --border-strong: #475569;
+        --fg: #f1f5f9;
+        --fg-muted: #94a3b8;
+        --fg-subtle: #64748b;
+      }
+      .root {
+        font-family: var(--font);
+        font-size: var(--fs-sm);
+        color: var(--fg);
+      }
 
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --font: -apple-system, 'Segoe UI', system-ui, sans-serif;
-    --fs-xs: 13px; --fs-sm: 15px; --fs-base: 17px; --fs-xl: 22px; --fs-2xl: 26px;
-    --bg: #ffffff; --bg-subtle: #f3f4f6;
-    --surface: #ffffff; --border: #e5e7eb; --border-strong: #d1d5db;
-    --fg: #111827; --fg-muted: #4b5563; --fg-subtle: #9ca3af;
-    --primary: #f59e0b; --primary-h: #d97706;
-    --destructive: #dc2626; --success: #15803d;
-    --sidebar-bg: #2a2a36;
-    --sidebar-active-bg: #20202b;
-    --sidebar-accent: #f59e0b;
-    --sidebar-active-text: #fcd34d;
-    /* FIXED: unselected = lighter/visible, hover = the old unselected (dimmer) */
-    --sidebar-item-text: #c8c8d4;   /* bright enough to read clearly */
-    --sidebar-item-hover-bg: #20202b;
-    --sidebar-item-hover-text: #e5e5ef;
-    --sidebar-border: #38384a;
-    --sidebar-flyout-bg: #1a1a23;
-    --radius-md: 6px; --radius-lg: 8px;
-  }
-  .dark {
-    --bg: #0f172a; --bg-subtle: #1e293b; --surface: #1e293b;
-    --border: #334155; --border-strong: #475569;
-    --fg: #f1f5f9; --fg-muted: #94a3b8; --fg-subtle: #64748b;
-  }
-  .root { font-family: var(--font); font-size: var(--fs-sm); color: var(--fg); }
+      /* SHELL */
+      .shell {
+        display: flex;
+        height: 560px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 0.5px solid var(--border-strong);
+        position: relative;
+      }
 
-  /* SHELL */
-  .shell { display: flex; height: 560px; border-radius: 10px; overflow: hidden; border: 0.5px solid var(--border-strong); position: relative; }
+      /* SIDEBAR */
+      .sidebar {
+        width: 72px;
+        background: var(--sidebar-bg);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        z-index: 20;
+        overflow: visible;
+        position: relative;
+      }
+      .sb-logo {
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid var(--sidebar-border);
+        flex-shrink: 0;
+      }
+      .sb-logo-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sb-logo-mark svg {
+        width: 18px;
+        height: 18px;
+        stroke: #fff;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+      }
+      .sb-nav {
+        flex: 1;
+        padding: 8px 0;
+        overflow: visible;
+      }
+      .sb-item-wrap {
+        position: relative;
+      }
 
-  /* SIDEBAR */
-  .sidebar { width: 72px; background: var(--sidebar-bg); display: flex; flex-direction: column; flex-shrink: 0; z-index: 20; overflow: visible; position: relative; }
-  .sb-logo { height: 58px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--sidebar-border); flex-shrink: 0; }
-  .sb-logo-mark { width: 34px; height: 34px; border-radius: 8px; background: var(--primary); display: flex; align-items: center; justify-content: center; }
-  .sb-logo-mark svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; }
-  .sb-nav { flex: 1; padding: 8px 0; overflow: visible; }
-  .sb-item-wrap { position: relative; }
+      .sb-item {
+        width: 72px;
+        height: 58px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        /* DEFAULT: clearly visible, lighter than hover */
+        color: var(--sidebar-item-text);
+        border-left: 3px solid transparent;
+        transition:
+          background 0.14s,
+          color 0.14s;
+      }
+      .sb-item:hover {
+        /* HOVER: slightly brighter bg, text gets brighter */
+        background: var(--sidebar-item-hover-bg);
+        color: var(--sidebar-item-hover-text);
+      }
+      .sb-item.active {
+        background: var(--sidebar-active-bg);
+        color: var(--sidebar-active-text);
+        border-left-color: var(--sidebar-accent);
+      }
+      .sb-item svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.75;
+        stroke-linecap: round;
+        flex-shrink: 0;
+      }
+      /* Capitalize each word */
+      .sb-item-lbl {
+        font-size: 11px;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        color: inherit;
+        text-transform: capitalize;
+      }
+      .sb-divider {
+        height: 1px;
+        background: var(--sidebar-border);
+        margin: 5px 14px;
+      }
 
-  .sb-item {
-    width: 72px; height: 58px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-    cursor: pointer;
-    /* DEFAULT: clearly visible, lighter than hover */
-    color: var(--sidebar-item-text);
-    border-left: 3px solid transparent;
-    transition: background .14s, color .14s;
-  }
-  .sb-item:hover {
-    /* HOVER: slightly brighter bg, text gets brighter */
-    background: var(--sidebar-item-hover-bg);
-    color: var(--sidebar-item-hover-text);
-  }
-  .sb-item.active {
-    background: var(--sidebar-active-bg);
-    color: var(--sidebar-active-text);
-    border-left-color: var(--sidebar-accent);
-  }
-  .sb-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; flex-shrink: 0; }
-  /* Capitalize each word */
-  .sb-item-lbl { font-size: 11px; line-height: 1; letter-spacing: .01em; color: inherit; text-transform: capitalize; }
-  .sb-divider { height: 1px; background: var(--sidebar-border); margin: 5px 14px; }
+      /* FLYOUT */
+      .flyout {
+        display: none;
+        position: absolute;
+        left: 72px;
+        top: 0;
+        width: 210px;
+        background: var(--sidebar-flyout-bg);
+        border: 1px solid var(--sidebar-border);
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+        padding: 6px 0;
+        z-index: 200;
+        box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.45);
+      }
+      .sb-item-wrap:hover .flyout {
+        display: block;
+      }
+      .flyout-title {
+        font-size: 11px;
+        color: #5a5a72;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 8px 16px 6px;
+        border-bottom: 1px solid #2a2a36;
+        margin-bottom: 4px;
+      }
+      .flyout-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        font-size: var(--fs-xs);
+        color: #c9c9d3;
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+      .flyout-item:hover {
+        background: #23232f;
+        color: #f9fafb;
+      }
+      .flyout-item.active {
+        color: var(--sidebar-active-text);
+        background: #23232f;
+      }
+      .flyout-item svg {
+        width: 15px;
+        height: 15px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.75;
+        flex-shrink: 0;
+      }
 
-  /* FLYOUT */
-  .flyout { display: none; position: absolute; left: 72px; top: 0; width: 210px; background: var(--sidebar-flyout-bg); border: 1px solid var(--sidebar-border); border-left: none; border-radius: 0 8px 8px 0; padding: 6px 0; z-index: 200; box-shadow: 6px 4px 20px rgba(0,0,0,.45); }
-  .sb-item-wrap:hover .flyout { display: block; }
-  .flyout-title { font-size: 11px; color: #5a5a72; text-transform: uppercase; letter-spacing: .08em; padding: 8px 16px 6px; border-bottom: 1px solid #2a2a36; margin-bottom: 4px; }
-  .flyout-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: var(--fs-xs); color: #c9c9d3; cursor: pointer; text-transform: capitalize; }
-  .flyout-item:hover { background: #23232f; color: #f9fafb; }
-  .flyout-item.active { color: var(--sidebar-active-text); background: #23232f; }
-  .flyout-item svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.75; flex-shrink: 0; }
+      /* MAIN */
+      .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
 
-  /* MAIN */
-  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+      /* TOPBAR */
+      .topbar {
+        height: 58px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        flex-shrink: 0;
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .tb-logo-title {
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        color: var(--fg);
+      }
+      .tb-logo-tenant {
+        font-size: var(--fs-xs);
+        color: var(--fg-muted);
+      }
+      .tb-sep {
+        color: var(--border-strong);
+        margin: 0 6px;
+      }
+      .tb-breadcrumb {
+        font-size: var(--fs-sm);
+        color: var(--fg-muted);
+      }
+      .tb-breadcrumb strong {
+        color: var(--fg);
+        font-weight: 500;
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .tb-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--fg-muted);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        position: relative;
+        transition: background 0.12s;
+      }
+      .tb-btn:hover {
+        background: var(--bg-subtle);
+        color: var(--fg);
+      }
+      .tb-btn.dm-on {
+        background: var(--sidebar-bg);
+        border-color: var(--sidebar-bg);
+        color: #f9fafb;
+      }
+      .tb-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.75;
+        stroke-linecap: round;
+      }
+      .notif-dot {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 7px;
+        height: 7px;
+        background: #dc2626;
+        border-radius: 50%;
+        border: 1.5px solid var(--surface);
+      }
+      .lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        height: 38px;
+        padding: 0 12px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        font-size: var(--fs-xs);
+        font-weight: 500;
+        color: var(--fg-muted);
+        cursor: pointer;
+        background: var(--surface);
+        font-family: var(--font);
+      }
+      .lang-btn:hover {
+        background: var(--bg-subtle);
+      }
+      .lang-btn svg {
+        width: 13px;
+        height: 13px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+      }
+      .user-btn {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        height: 38px;
+        padding: 0 10px 0 5px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        background: var(--surface);
+        transition: background 0.12s;
+      }
+      .user-btn:hover {
+        background: var(--bg-subtle);
+      }
+      .avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #fef3c7;
+        color: #92400e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .user-name {
+        font-size: var(--fs-xs);
+        font-weight: 600;
+        color: var(--fg);
+      }
+      .user-role-lbl {
+        font-size: 11px;
+        color: var(--fg-subtle);
+      }
+      .user-btn svg {
+        width: 13px;
+        height: 13px;
+        stroke: var(--fg-subtle);
+        fill: none;
+        stroke-width: 2;
+      }
 
-  /* TOPBAR */
-  .topbar { height: 58px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
-  .topbar-left { display: flex; align-items: center; gap: 10px; }
-  .tb-logo-title { font-size: var(--fs-sm); font-weight: 600; color: var(--fg); }
-  .tb-logo-tenant { font-size: var(--fs-xs); color: var(--fg-muted); }
-  .tb-sep { color: var(--border-strong); margin: 0 6px; }
-  .tb-breadcrumb { font-size: var(--fs-sm); color: var(--fg-muted); }
-  .tb-breadcrumb strong { color: var(--fg); font-weight: 500; }
-  .topbar-right { display: flex; align-items: center; gap: 6px; }
-  .tb-btn { width: 38px; height: 38px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--fg-muted); border: 1px solid var(--border); background: var(--surface); position: relative; transition: background .12s; }
-  .tb-btn:hover { background: var(--bg-subtle); color: var(--fg); }
-  .tb-btn.dm-on { background: var(--sidebar-bg); border-color: var(--sidebar-bg); color: #f9fafb; }
-  .tb-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; }
-  .notif-dot { position: absolute; top: 7px; right: 7px; width: 7px; height: 7px; background: #dc2626; border-radius: 50%; border: 1.5px solid var(--surface); }
-  .lang-btn { display: flex; align-items: center; gap: 5px; height: 38px; padding: 0 12px; border-radius: var(--radius-md); border: 1px solid var(--border); font-size: var(--fs-xs); font-weight: 500; color: var(--fg-muted); cursor: pointer; background: var(--surface); font-family: var(--font); }
-  .lang-btn:hover { background: var(--bg-subtle); }
-  .lang-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
-  .user-btn { display: flex; align-items: center; gap: 9px; height: 38px; padding: 0 10px 0 5px; border-radius: var(--radius-md); border: 1px solid var(--border); cursor: pointer; background: var(--surface); transition: background .12s; }
-  .user-btn:hover { background: var(--bg-subtle); }
-  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #fef3c7; color: #92400e; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
-  .user-name { font-size: var(--fs-xs); font-weight: 600; color: var(--fg); }
-  .user-role-lbl { font-size: 11px; color: var(--fg-subtle); }
-  .user-btn svg { width: 13px; height: 13px; stroke: var(--fg-subtle); fill: none; stroke-width: 2; }
+      /* PAGE */
+      .page-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 28px;
+        background: var(--bg-subtle);
+      }
+      .page-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+      .page-title {
+        font-size: var(--fs-xl);
+        font-weight: 600;
+        color: var(--fg);
+        margin-bottom: 4px;
+      }
+      .page-desc {
+        font-size: var(--fs-xs);
+        color: var(--fg-muted);
+      }
+      .primary-btn {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        height: 42px;
+        padding: 0 18px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-md);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font);
+      }
+      .primary-btn svg {
+        width: 16px;
+        height: 16px;
+        stroke: #fff;
+        fill: none;
+        stroke-width: 2;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: var(--fg-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        margin-bottom: 10px;
+      }
+      .stat-val {
+        font-size: var(--fs-2xl);
+        font-weight: 600;
+        color: var(--fg);
+        margin-bottom: 4px;
+      }
+      .stat-sub {
+        font-size: var(--fs-xs);
+        color: var(--fg-muted);
+      }
+      .stat-sub.up {
+        color: var(--success);
+      }
+      .stat-sub.alert {
+        color: var(--destructive);
+      }
+      .content-block {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .content-block-lbl {
+        font-size: var(--fs-xs);
+        color: var(--border-strong);
+      }
 
-  /* PAGE */
-  .page-body { flex: 1; overflow-y: auto; padding: 28px; background: var(--bg-subtle); }
-  .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
-  .page-title { font-size: var(--fs-xl); font-weight: 600; color: var(--fg); margin-bottom: 4px; }
-  .page-desc { font-size: var(--fs-xs); color: var(--fg-muted); }
-  .primary-btn { display: flex; align-items: center; gap: 7px; height: 42px; padding: 0 18px; background: var(--primary) !important; color: #fff !important; border: none !important; border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 600; cursor: pointer; font-family: var(--font); }
-  .primary-btn svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; }
-  .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 16px; }
-  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
-  .stat-label { font-size: 11px; color: var(--fg-subtle); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
-  .stat-val { font-size: var(--fs-2xl); font-weight: 600; color: var(--fg); margin-bottom: 4px; }
-  .stat-sub { font-size: var(--fs-xs); color: var(--fg-muted); }
-  .stat-sub.up { color: var(--success); }
-  .stat-sub.alert { color: var(--destructive); }
-  .content-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); height: 160px; display: flex; align-items: center; justify-content: center; }
-  .content-block-lbl { font-size: var(--fs-xs); color: var(--border-strong); }
+      /* DARK */
+      .dark .page-body {
+        background: var(--bg-subtle);
+      }
+      .dark .stat-card {
+        background: var(--surface);
+        border-color: var(--border);
+      }
+      .dark .stat-val {
+        color: var(--fg);
+      }
+      .dark .content-block {
+        background: var(--surface);
+        border-color: var(--border);
+      }
+      .dark .topbar {
+        background: var(--surface);
+        border-bottom-color: var(--border);
+      }
+      .dark .tb-btn {
+        background: var(--surface);
+        border-color: var(--border);
+      }
+      .dark .lang-btn {
+        background: var(--surface);
+        border-color: var(--border);
+      }
+      .dark .user-btn {
+        background: var(--surface);
+        border-color: var(--border);
+      }
 
-  /* DARK */
-  .dark .page-body { background: var(--bg-subtle); }
-  .dark .stat-card { background: var(--surface); border-color: var(--border); }
-  .dark .stat-val { color: var(--fg); }
-  .dark .content-block { background: var(--surface); border-color: var(--border); }
-  .dark .topbar { background: var(--surface); border-bottom-color: var(--border); }
-  .dark .tb-btn { background: var(--surface); border-color: var(--border); }
-  .dark .lang-btn { background: var(--surface); border-color: var(--border); }
-  .dark .user-btn { background: var(--surface); border-color: var(--border); }
+      /* CONTROLS */
+      .controls {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 12px;
+      }
+      .ctrl-tab {
+        font-size: 12px;
+        padding: 5px 12px;
+        border-radius: 99px;
+        border: 0.5px solid #d1d5db;
+        cursor: pointer;
+        color: #6b7280;
+        background: #fff;
+        white-space: nowrap;
+        font-family: var(--font);
+      }
+      .ctrl-tab.on {
+        background: #f59e0b;
+        color: #fff;
+        border-color: #f59e0b;
+      }
+      .ctrl-hint {
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        margin-top: 7px;
+      }
+    </style>
 
-  /* CONTROLS */
-  .controls { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
-  .ctrl-tab { font-size: 12px; padding: 5px 12px; border-radius: 99px; border: 0.5px solid #d1d5db; cursor: pointer; color: #6b7280; background: #fff; white-space: nowrap; font-family: var(--font); }
-  .ctrl-tab.on { background: #f59e0b; color: #fff; border-color: #f59e0b; }
-  .ctrl-hint { font-size: 12px; color: #9ca3af; text-align: center; margin-top: 7px; }
-</style>
-
-<div class="root">
-<div class="shell" id="shell">
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sb-logo">
-      <div class="sb-logo-mark"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-    </div>
-    <nav class="sb-nav">
-
-      <div class="sb-item-wrap">
-        <div class="sb-item active" id="sbi-dashboard" onclick="navTo('dashboard',this)">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span class="sb-item-lbl">Dashboard</span>
-        </div>
-      </div>
-
-      <div class="sb-item-wrap">
-        <div class="sb-item" id="sbi-orders" onclick="navTo('orders',this)">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span class="sb-item-lbl">Orders</span>
-        </div>
-      </div>
-
-      <div class="sb-item-wrap">
-        <div class="sb-item" id="sbi-customers" onclick="navTo('customers',this)">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span class="sb-item-lbl">Customers</span>
-        </div>
-      </div>
-
-      <div class="sb-item-wrap">
-        <div class="sb-item" id="sbi-catalog">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          <span class="sb-item-lbl">Catalog</span>
-        </div>
-        <div class="flyout">
-          <div class="flyout-title">Catalog</div>
-          <div class="flyout-item active" id="fli-categories" onclick="flyoutTo('categories','catalog')">
-            <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-            Categories
+    <div class="root">
+      <div class="shell" id="shell">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+          <div class="sb-logo">
+            <div class="sb-logo-mark">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
           </div>
-          <div class="flyout-item" id="fli-products" onclick="flyoutTo('products','catalog')">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            Products
+          <nav class="sb-nav">
+            <div class="sb-item-wrap">
+              <div class="sb-item active" id="sbi-dashboard" onclick="navTo('dashboard', this)">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                </svg>
+                <span class="sb-item-lbl">Dashboard</span>
+              </div>
+            </div>
+
+            <div class="sb-item-wrap">
+              <div class="sb-item" id="sbi-orders" onclick="navTo('orders', this)">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span class="sb-item-lbl">Orders</span>
+              </div>
+            </div>
+
+            <div class="sb-item-wrap">
+              <div class="sb-item" id="sbi-customers" onclick="navTo('customers', this)">
+                <svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span class="sb-item-lbl">Customers</span>
+              </div>
+            </div>
+
+            <div class="sb-item-wrap">
+              <div class="sb-item" id="sbi-catalog">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  />
+                </svg>
+                <span class="sb-item-lbl">Catalog</span>
+              </div>
+              <div class="flyout">
+                <div class="flyout-title">Catalog</div>
+                <div
+                  class="flyout-item active"
+                  id="fli-categories"
+                  onclick="flyoutTo('categories', 'catalog')"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
+                    />
+                    <line x1="7" y1="7" x2="7.01" y2="7" />
+                  </svg>
+                  Categories
+                </div>
+                <div
+                  class="flyout-item"
+                  id="fli-products"
+                  onclick="flyoutTo('products', 'catalog')"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="16" />
+                    <line x1="8" y1="12" x2="16" y2="12" />
+                  </svg>
+                  Products
+                </div>
+              </div>
+            </div>
+
+            <div class="sb-item-wrap" id="sbw-addresses">
+              <div class="sb-item" id="sbi-addresses" onclick="navTo('addresses', this)">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span class="sb-item-lbl">Addresses</span>
+              </div>
+            </div>
+
+            <div class="sb-divider" id="sb-admin-div"></div>
+
+            <div class="sb-item-wrap" id="sbw-sales">
+              <div class="sb-item" id="sbi-sales" onclick="navTo('sales', this)">
+                <svg viewBox="0 0 24 24">
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+                <span class="sb-item-lbl">Sales</span>
+              </div>
+            </div>
+
+            <div class="sb-item-wrap" id="sbw-settings">
+              <div class="sb-item" id="sbi-settings" onclick="navTo('settings', this)">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  />
+                </svg>
+                <span class="sb-item-lbl">Settings</span>
+              </div>
+            </div>
+
+            <div class="sb-item-wrap" id="sbw-audit">
+              <div class="sb-item" id="sbi-audit" onclick="navTo('audit', this)">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+                <span class="sb-item-lbl">Audit</span>
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <!-- MAIN -->
+        <div class="main" id="main-area">
+          <div class="topbar">
+            <div class="topbar-left">
+              <div>
+                <div class="tb-logo-title">Admin Portal</div>
+                <div class="tb-logo-tenant">Pizza Palace Praha</div>
+              </div>
+              <span class="tb-sep">|</span>
+              <div class="tb-breadcrumb" id="tb-bc"><strong>Dashboard</strong></div>
+            </div>
+            <div class="topbar-right">
+              <div class="lang-btn">
+                EN <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
+              </div>
+              <div class="tb-btn" id="dm-btn" onclick="toggleDark()" title="Toggle dark mode">
+                <svg id="dm-moon" viewBox="0 0 24 24">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+                <svg id="dm-sun" style="display: none" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+              </div>
+              <div class="tb-btn">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg>
+                <span class="notif-dot"></span>
+              </div>
+              <div class="user-btn">
+                <div class="avatar" id="tb-av">JN</div>
+                <div>
+                  <div class="user-name" id="tb-name">Jan Novák</div>
+                  <div class="user-role-lbl" id="tb-role">Admin</div>
+                </div>
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="page-body">
+            <div class="page-header">
+              <div>
+                <div class="page-title" id="pg-title">Dashboard</div>
+                <div class="page-desc" id="pg-desc">
+                  Welcome back, Jan. Here's what's happening today.
+                </div>
+              </div>
+              <button class="primary-btn">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" /></svg
+                >Export
+              </button>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-label">Today's Orders</div>
+                <div class="stat-val">42</div>
+                <div class="stat-sub up">↑ 8 from yesterday</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Today's Revenue</div>
+                <div class="stat-val">12 840 Kč</div>
+                <div class="stat-sub up">↑ 12% vs last week</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Low Stock Alerts</div>
+                <div class="stat-val" style="color: var(--destructive)">3</div>
+                <div class="stat-sub alert">Products need restocking</div>
+              </div>
+            </div>
+            <div class="content-block">
+              <span class="content-block-lbl">Recent orders table — Module 4</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="sb-item-wrap" id="sbw-addresses">
-        <div class="sb-item" id="sbi-addresses" onclick="navTo('addresses',this)">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span class="sb-item-lbl">Addresses</span>
-        </div>
+      <div class="controls">
+        <span class="ctrl-tab on" onclick="setRole('admin', this)">Admin</span>
+        <span class="ctrl-tab" onclick="setRole('manager', this)">Manager</span>
+        <span class="ctrl-tab" onclick="setRole('staff', this)">Staff</span>
       </div>
-
-      <div class="sb-divider" id="sb-admin-div"></div>
-
-      <div class="sb-item-wrap" id="sbw-sales">
-        <div class="sb-item" id="sbi-sales" onclick="navTo('sales',this)">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <span class="sb-item-lbl">Sales</span>
-        </div>
-      </div>
-
-      <div class="sb-item-wrap" id="sbw-settings">
-        <div class="sb-item" id="sbi-settings" onclick="navTo('settings',this)">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          <span class="sb-item-lbl">Settings</span>
-        </div>
-      </div>
-
-      <div class="sb-item-wrap" id="sbw-audit">
-        <div class="sb-item" id="sbi-audit" onclick="navTo('audit',this)">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          <span class="sb-item-lbl">Audit</span>
-        </div>
-      </div>
-
-    </nav>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main" id="main-area">
-    <div class="topbar">
-      <div class="topbar-left">
-        <div>
-          <div class="tb-logo-title">Admin Portal</div>
-          <div class="tb-logo-tenant">Pizza Palace Praha</div>
-        </div>
-        <span class="tb-sep">|</span>
-        <div class="tb-breadcrumb" id="tb-bc"><strong>Dashboard</strong></div>
-      </div>
-      <div class="topbar-right">
-        <div class="lang-btn">EN <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="tb-btn" id="dm-btn" onclick="toggleDark()" title="Toggle dark mode">
-          <svg id="dm-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg id="dm-sun" style="display:none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </div>
-        <div class="tb-btn">
-          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span class="notif-dot"></span>
-        </div>
-        <div class="user-btn">
-          <div class="avatar" id="tb-av">JN</div>
-          <div><div class="user-name" id="tb-name">Jan Novák</div><div class="user-role-lbl" id="tb-role">Admin</div></div>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
+      <div class="ctrl-hint">
+        Hover sidebar icons to see flyouts · Switch roles for nav visibility · Moon icon toggles
+        dark mode
       </div>
     </div>
-    <div class="page-body">
-      <div class="page-header">
-        <div>
-          <div class="page-title" id="pg-title">Dashboard</div>
-          <div class="page-desc" id="pg-desc">Welcome back, Jan. Here's what's happening today.</div>
-        </div>
-        <button class="primary-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-label">Today's Orders</div><div class="stat-val">42</div><div class="stat-sub up">↑ 8 from yesterday</div></div>
-        <div class="stat-card"><div class="stat-label">Today's Revenue</div><div class="stat-val">12 840 Kč</div><div class="stat-sub up">↑ 12% vs last week</div></div>
-        <div class="stat-card"><div class="stat-label">Low Stock Alerts</div><div class="stat-val" style="color:var(--destructive);">3</div><div class="stat-sub alert">Products need restocking</div></div>
-      </div>
-      <div class="content-block"><span class="content-block-lbl">Recent orders table — Module 4</span></div>
-    </div>
-  </div>
-</div>
 
-<div class="controls">
-  <span class="ctrl-tab on" onclick="setRole('admin',this)">Admin</span>
-  <span class="ctrl-tab" onclick="setRole('manager',this)">Manager</span>
-  <span class="ctrl-tab" onclick="setRole('staff',this)">Staff</span>
-</div>
-<div class="ctrl-hint">Hover sidebar icons to see flyouts · Switch roles for nav visibility · Moon icon toggles dark mode</div>
-</div>
-
-<script>
-var isDark=false;
-function navTo(k,el){
-  document.querySelectorAll('.sb-item').forEach(function(n){n.classList.remove('active');});
-  document.querySelectorAll('.flyout-item').forEach(function(n){n.classList.remove('active');});
-  el.classList.add('active');
-  var L={dashboard:'Dashboard',orders:'Orders',customers:'Customers',addresses:'Addresses',sales:'Sales',settings:'Settings',audit:'Audit Logs'};
-  var D={dashboard:"Welcome back, Jan. Here's what's happening today.",orders:'Manage and track all incoming orders.',customers:'View and manage your customer base.',addresses:'Manage all customer delivery addresses.',sales:'Analytics and revenue insights.',settings:'Configure your tenant settings.',audit:'View all system audit logs.'};
-  document.getElementById('tb-bc').innerHTML='<strong>'+(L[k]||k)+'</strong>';
-  document.getElementById('pg-title').textContent=L[k]||k;
-  document.getElementById('pg-desc').textContent=D[k]||'';
-}
-function flyoutTo(c,p){
-  document.querySelectorAll('.sb-item').forEach(function(n){n.classList.remove('active');});
-  document.querySelectorAll('.flyout-item').forEach(function(n){n.classList.remove('active');});
-  document.getElementById('sbi-'+p).classList.add('active');
-  document.getElementById('fli-'+c).classList.add('active');
-  var L={categories:'Categories',products:'Products'};
-  document.getElementById('tb-bc').innerHTML='Catalog <span style="color:var(--fg-subtle);margin:0 5px;">›</span><strong>'+L[c]+'</strong>';
-  document.getElementById('pg-title').textContent=L[c];
-  document.getElementById('pg-desc').textContent=c==='categories'?'Manage product categories.':'Manage your product catalog.';
-}
-function toggleDark(){
-  isDark=!isDark;
-  document.getElementById('main-area').classList.toggle('dark',isDark);
-  document.getElementById('dm-moon').style.display=isDark?'none':'';
-  document.getElementById('dm-sun').style.display=isDark?'':'none';
-  document.getElementById('dm-btn').classList.toggle('dm-on',isDark);
-}
-function setRole(r,el){
-  document.querySelectorAll('.ctrl-tab').forEach(function(t){t.classList.remove('on');});
-  el.classList.add('on');
-  ['sbw-sales','sbw-settings','sbw-audit','sb-admin-div'].forEach(function(id){document.getElementById(id).style.display=r==='admin'?'':'none';});
-  document.getElementById('sbw-addresses').style.display=(r==='admin'||r==='manager')?'':'none';
-  var N={admin:'Jan Novák',manager:'Marie K.',staff:'Pavel H.'};
-  var I={admin:'JN',manager:'MK',staff:'PH'};
-  var R={admin:'Admin',manager:'Manager',staff:'Staff'};
-  document.getElementById('tb-av').textContent=I[r];
-  document.getElementById('tb-name').textContent=N[r];
-  document.getElementById('tb-role').textContent=R[r];
-}
-</script>
+    <script>
+      var isDark = false;
+      function navTo(k, el) {
+        document.querySelectorAll('.sb-item').forEach(function (n) {
+          n.classList.remove('active');
+        });
+        document.querySelectorAll('.flyout-item').forEach(function (n) {
+          n.classList.remove('active');
+        });
+        el.classList.add('active');
+        var L = {
+          dashboard: 'Dashboard',
+          orders: 'Orders',
+          customers: 'Customers',
+          addresses: 'Addresses',
+          sales: 'Sales',
+          settings: 'Settings',
+          audit: 'Audit Logs',
+        };
+        var D = {
+          dashboard: "Welcome back, Jan. Here's what's happening today.",
+          orders: 'Manage and track all incoming orders.',
+          customers: 'View and manage your customer base.',
+          addresses: 'Manage all customer delivery addresses.',
+          sales: 'Analytics and revenue insights.',
+          settings: 'Configure your tenant settings.',
+          audit: 'View all system audit logs.',
+        };
+        document.getElementById('tb-bc').innerHTML = '<strong>' + (L[k] || k) + '</strong>';
+        document.getElementById('pg-title').textContent = L[k] || k;
+        document.getElementById('pg-desc').textContent = D[k] || '';
+      }
+      function flyoutTo(c, p) {
+        document.querySelectorAll('.sb-item').forEach(function (n) {
+          n.classList.remove('active');
+        });
+        document.querySelectorAll('.flyout-item').forEach(function (n) {
+          n.classList.remove('active');
+        });
+        document.getElementById('sbi-' + p).classList.add('active');
+        document.getElementById('fli-' + c).classList.add('active');
+        var L = { categories: 'Categories', products: 'Products' };
+        document.getElementById('tb-bc').innerHTML =
+          'Catalog <span style="color:var(--fg-subtle);margin:0 5px;">›</span><strong>' +
+          L[c] +
+          '</strong>';
+        document.getElementById('pg-title').textContent = L[c];
+        document.getElementById('pg-desc').textContent =
+          c === 'categories' ? 'Manage product categories.' : 'Manage your product catalog.';
+      }
+      function toggleDark() {
+        isDark = !isDark;
+        document.getElementById('main-area').classList.toggle('dark', isDark);
+        document.getElementById('dm-moon').style.display = isDark ? 'none' : '';
+        document.getElementById('dm-sun').style.display = isDark ? '' : 'none';
+        document.getElementById('dm-btn').classList.toggle('dm-on', isDark);
+      }
+      function setRole(r, el) {
+        document.querySelectorAll('.ctrl-tab').forEach(function (t) {
+          t.classList.remove('on');
+        });
+        el.classList.add('on');
+        ['sbw-sales', 'sbw-settings', 'sbw-audit', 'sb-admin-div'].forEach(function (id) {
+          document.getElementById(id).style.display = r === 'admin' ? '' : 'none';
+        });
+        document.getElementById('sbw-addresses').style.display =
+          r === 'admin' || r === 'manager' ? '' : 'none';
+        var N = { admin: 'Jan Novák', manager: 'Marie K.', staff: 'Pavel H.' };
+        var I = { admin: 'JN', manager: 'MK', staff: 'PH' };
+        var R = { admin: 'Admin', manager: 'Manager', staff: 'Staff' };
+        document.getElementById('tb-av').textContent = I[r];
+        document.getElementById('tb-name').textContent = N[r];
+        document.getElementById('tb-role').textContent = R[r];
+      }
+    </script>
+  </body>
+</html>

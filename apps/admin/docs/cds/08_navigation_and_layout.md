@@ -82,6 +82,8 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  // Active state: bg --sidebar-active-bg, border-left --sidebar-accent, text --sidebar-active-text
+  // Inactive state: text/icon --sidebar-muted-text
   { label: 'Dashboard',  href: '/dashboard',           icon: <LayoutDashboard size={18} />, roles: ['admin', 'manager', 'staff'] },
   { label: 'Orders',     href: '/orders',               icon: <ShoppingBag size={18} />,     roles: ['admin', 'manager', 'staff'] },
   { label: 'Customers',  href: '/customers',            icon: <Users size={18} />,           roles: ['admin', 'manager', 'staff'] },
@@ -108,7 +110,7 @@ The Tooltip on collapsed nav items is critical for usability and accessibility â
 
 ### Active State
 
-Active route detected via Next.js `usePathname()`. Active item has a stronger background and primary-coloured text. For nested items (Catalog), the parent is highlighted if any child route is active.
+Active route detected via Next.js `usePathname()`. Active item uses `--sidebar-active-bg` for its background, a 3px left border in `--sidebar-accent`, and text/icon in `--sidebar-active-text`. Inactive items use `--sidebar-muted-text`. For nested items (Catalog), the parent is highlighted if any child route is active. The sidebar palette uses dedicated `--sidebar-*` tokens and is always dark regardless of the page light/dark mode toggle.
 
 ### Role Filtering
 

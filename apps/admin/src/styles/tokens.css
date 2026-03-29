@@ -20,10 +20,10 @@
     --foreground-subtle: 120 113 108; /* warm gray-500 — placeholder, meta */
     --foreground-disabled: 168 162 158; /* warm gray-400 — disabled state text */
 
-    /* Primary — blue-700 (#1D4ED8) */
-    --primary: 29 78 216;
-    --primary-hover: 30 64 175; /* blue-800 — hover state */
-    --primary-subtle: 219 234 254; /* blue-100 — backgrounds, highlights */
+    /* Primary — amber-500 (#F59E0B) */
+    --primary: 245 158 11; /* amber-500 */
+    --primary-hover: 217 119 6; /* amber-600 — hover state */
+    --primary-subtle: 254 243 199; /* amber-100 — backgrounds, highlights */
     --primary-foreground: 255 255 255; /* text on primary bg */
 
     /* Secondary */
@@ -49,7 +49,7 @@
     --warning-foreground: 120 53 15; /* amber-900 */
 
     /* Semantic — Info */
-    --info: 29 78 216; /* same as primary */
+    --info: 59 130 246; /* blue-500 — info is now independent of primary */
     --info-subtle: 219 234 254; /* blue-100 */
     --info-foreground: 30 58 138; /* blue-900 */
 
@@ -58,8 +58,17 @@
     --muted-foreground: 120 113 108;
 
     /* Focus ring */
-    --ring: 29 78 216;
+    --ring: 245 158 11; /* amber-500 — matches primary */
     --ring-offset: 255 255 255;
+
+    /* Sidebar Warm purple-grey dark chrome. Intentionally distinct from the page background — always dark regardless of light/dark mode. */
+    --sidebar-bg: 42 42 54; /* #2A2A36 — warm purple-grey base */
+    --sidebar-active-bg: 32 32 43; /* #20202B — darker active item bg */
+    --sidebar-accent: 245 158 11; /* #F59E0B — amber-500, active border + icon */
+    --sidebar-active-text: 252 211 77; /* #FCD34D — amber-300, active item text */
+    --sidebar-muted-text: 145 145 160; /* #9191A0 — inactive item text / icons */
+    --sidebar-border: 56 56 74; /* #38384A — purple-tinted dividers */
+    --sidebar-flyout-bg: 26 26 35; /* #1A1A23 — flyout panel background */
 
     /* Radius */
     --radius-sm: 4px;
@@ -139,9 +148,9 @@
     --foreground-disabled: 87 83 78;
 
     /* Primary lightens in dark mode for readability on dark backgrounds */
-    --primary: 96 165 250; /* blue-400 */
-    --primary-hover: 147 197 253; /* blue-300 */
-    --primary-subtle: 30 58 138; /* blue-900 */
+    --primary: 251 191 36; /* amber-400 */
+    --primary-hover: 252 211 77; /* amber-300 */
+    --primary-subtle: 120 53 15; /* amber-900 */
     --primary-foreground: 12 10 9;
 
     --secondary: 41 37 36;
@@ -161,14 +170,14 @@
     --warning-subtle: 120 53 15; /* amber-900 */
     --warning-foreground: 255 251 235;
 
-    --info: 96 165 250;
+    --info: 96 165 250; /* blue-400 — unchanged, info stays blue */
     --info-subtle: 30 58 138;
     --info-foreground: 219 234 254;
 
     --muted: 41 37 36;
     --muted-foreground: 120 113 108;
 
-    --ring: 96 165 250;
+    --ring: 251 191 36; /* amber-400 — matches dark mode primary */
     --ring-offset: 12 10 9;
 
     /* Order status colours */
@@ -264,8 +273,8 @@
 
   --color-ring: rgb(var(--ring));
 
-  /* Typography */
-  --font-family-sans: var(--font-sans);
+  /* Typography - OLD */
+  /*   --font-family-sans: var(--font-sans);
   --font-family-mono: var(--font-mono);
 
   --font-size-xs: 0.6875rem;
@@ -274,7 +283,19 @@
   --font-size-lg: 1.0625rem;
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
+  --font-size-3xl: 1.875rem; */
+
+  /* Typography */
+  --font-family-sans: var(--font-sans);
+  --font-family-mono: var(--font-mono);
+
+  --font-size-xs: 0.8125rem; /* 13px — meta, timestamps, helper text */
+  --font-size-sm: 0.9375rem; /* 15px — default body, table cells, form labels */
+  --font-size-base: 1.0625rem; /* 17px — card descriptions, longer body */
+  --font-size-lg: 1.1875rem; /* 19px — card titles, section headings */
+  --font-size-xl: 1.375rem; /* 22px — page titles (PageHeader) */
+  --font-size-2xl: 1.625rem; /* 26px — dashboard stat numbers */
+  --font-size-3xl: 2rem; /* 32px — large metric displays */
 
   /* Shadows */
   --shadow-sm: var(--shadow-raw-sm);

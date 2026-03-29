@@ -100,12 +100,12 @@ Full `tokens.css` — light mode (`:root`) and dark mode (`.dark`):
     --foreground-subtle:   120 113 108;   /* warm gray-500 — placeholder, meta */
     --foreground-disabled: 168 162 158;   /* warm gray-400 — disabled state text */
 
-    /* ─────────────────────────────
-       Primary — blue-700 (#1D4ED8)
+/* ─────────────────────────────
+       Primary — amber-500 (#F59E0B)
     ───────────────────────────── */
-    --primary:             29 78 216;
-    --primary-hover:       30 64 175;     /* blue-800 — hover state */
-    --primary-subtle:      219 234 254;   /* blue-100 — backgrounds, highlights */
+    --primary:             245 158 11;    /* amber-500 */
+    --primary-hover:       217 119 6;     /* amber-600 — hover state */
+    --primary-subtle:      254 243 199;   /* amber-100 — backgrounds, highlights */
     --primary-foreground:  255 255 255;   /* text on primary bg */
 
     /* ─────────────────────────────
@@ -140,7 +140,7 @@ Full `tokens.css` — light mode (`:root`) and dark mode (`.dark`):
     /* ─────────────────────────────
        Semantic — Info
     ───────────────────────────── */
-    --info:                29 78 216;     /* same as primary */
+    --info:                59 130 246;    /* blue-500 — info is now independent of primary */
     --info-subtle:         219 234 254;   /* blue-100 */
     --info-foreground:     30 58 138;     /* blue-900 */
 
@@ -153,8 +153,23 @@ Full `tokens.css` — light mode (`:root`) and dark mode (`.dark`):
     /* ─────────────────────────────
        Focus ring
     ───────────────────────────── */
-    --ring:                29 78 216;
+    --ring:                245 158 11;    /* amber-500 — matches primary */
     --ring-offset:         255 255 255;
+
+    /* ─────────────────────────────
+       Sidebar
+       Warm purple-grey dark chrome.
+       Intentionally distinct from the
+       page background — always dark
+       regardless of light/dark mode.
+    ───────────────────────────── */
+    --sidebar-bg:          42 42 54;      /* #2A2A36 — warm purple-grey base */
+    --sidebar-active-bg:   32 32 43;      /* #20202B — darker active item bg */
+    --sidebar-accent:      245 158 11;    /* #F59E0B — amber-500, active border + icon */
+    --sidebar-active-text: 252 211 77;    /* #FCD34D — amber-300, active item text */
+    --sidebar-muted-text:  145 145 160;   /* #9191A0 — inactive item text / icons */
+    --sidebar-border:      56 56 74;      /* #38384A — purple-tinted dividers */
+    --sidebar-flyout-bg:   26 26 35;      /* #1A1A23 — flyout panel background */
   }
 
   /* ─────────────────────────────────────
@@ -177,10 +192,10 @@ Full `tokens.css` — light mode (`:root`) and dark mode (`.dark`):
     --foreground-subtle:   120 113 108;
     --foreground-disabled: 87 83 78;
 
-    /* Primary lightens in dark mode for readability on dark backgrounds */
-    --primary:             96 165 250;    /* blue-400 */
-    --primary-hover:       147 197 253;   /* blue-300 */
-    --primary-subtle:      30 58 138;     /* blue-900 */
+   /* Primary lightens in dark mode for readability on dark backgrounds */
+    --primary:             251 191 36;    /* amber-400 */
+    --primary-hover:       252 211 77;    /* amber-300 */
+    --primary-subtle:      120 53 15;     /* amber-900 */
     --primary-foreground:  12 10 9;
 
     --secondary:           41 37 36;
@@ -200,14 +215,14 @@ Full `tokens.css` — light mode (`:root`) and dark mode (`.dark`):
     --warning-subtle:      120 53 15;     /* amber-900 */
     --warning-foreground:  255 251 235;
 
-    --info:                96 165 250;
+    --info:                96 165 250;    /* blue-400 — unchanged, info stays blue */
     --info-subtle:         30 58 138;
     --info-foreground:     219 234 254;
 
     --muted:               41 37 36;
     --muted-foreground:    120 113 108;
 
-    --ring:                96 165 250;
+    --ring:                251 191 36;    /* amber-400 — matches dark mode primary */
     --ring-offset:         12 10 9;
   }
 }
@@ -374,28 +389,28 @@ Geist is the typeface built by Vercel for their own products. It was chosen here
 
 The scale is **compact** — sized for an admin portal where information density matters, not a marketing site with generous whitespace.
 
-13px (`text-sm`) as the body text is intentional. This is the size used by Linear, the Vercel dashboard, and GitHub. It fits more data in table rows without feeling cramped because Geist has strong legibility at this size.
+15px (`text-sm`) as the default body text is intentional. The original 13px scale was reconsidered during the Module 1 mockup phase — the Magento-style dark sidebar and overall portal aesthetic require more visual weight and breathing room than a developer-tool UI like Linear or Vercel. 15px reads comfortably at arm's length, reduces eye strain during long shifts, and gives the sidebar navigation labels the presence they need at 64px width.
 
-| Token | Size | Line height | Weight | Usage |
-|---|---|---|---|---|
-| `text-xs` | 11px | 16px | 400 | Timestamps, meta, helper text, table secondary info |
-| `text-sm` | 13px | 20px | 400 | **Default body** — table cells, form labels, descriptions |
-| `text-base` | 15px | 24px | 400 | Longer body text, card descriptions |
-| `text-lg` | 17px | 28px | 500 | Card titles, section headings |
-| `text-xl` | 20px | 28px | 600 | Page titles (`PageHeader`) |
-| `text-2xl` | 24px | 32px | 600 | Dashboard stat numbers |
-| `text-3xl` | 30px | 36px | 700 | Large metric displays |
+| Token       | Size | Line height | Weight | Usage                                                     |
+| ----------- | ---- | ----------- | ------ | --------------------------------------------------------- |
+| `text-xs`   | 13px | 18px        | 400    | Timestamps, meta, helper text, table secondary info       |
+| `text-sm`   | 15px | 22px        | 400    | **Default body** — table cells, form labels, descriptions |
+| `text-base` | 17px | 26px        | 400    | Longer body text, card descriptions                       |
+| `text-lg`   | 19px | 28px        | 500    | Card titles, section headings                             |
+| `text-xl`   | 22px | 30px        | 600    | Page titles (`PageHeader`)                                |
+| `text-2xl`  | 26px | 34px        | 600    | Dashboard stat numbers                                    |
+| `text-3xl`  | 32px | 40px        | 700    | Large metric displays                                     |
 
 ```css
 /* In @theme block — Tailwind 4 */
 @theme {
-  --font-size-xs:   0.6875rem;   /* 11px */
-  --font-size-sm:   0.8125rem;   /* 13px */
-  --font-size-base: 0.9375rem;   /* 15px */
-  --font-size-lg:   1.0625rem;   /* 17px */
-  --font-size-xl:   1.25rem;     /* 20px */
-  --font-size-2xl:  1.5rem;      /* 24px */
-  --font-size-3xl:  1.875rem;    /* 30px */
+  --font-size-xs:   0.8125rem;   /* 13px */
+  --font-size-sm:   0.9375rem;   /* 15px */
+  --font-size-base: 1.0625rem;   /* 17px */
+  --font-size-lg:   1.1875rem;   /* 19px */
+  --font-size-xl:   1.375rem;    /* 22px */
+  --font-size-2xl:  1.625rem;    /* 26px */
+  --font-size-3xl:  2rem;        /* 32px */
 }
 ```
 
@@ -476,20 +491,33 @@ All token values are defined for both `:root` (light) and `.dark` (dark) in `tok
 
 ## 9. Accent Colour Swapping
 
-The primary colour is `blue-700` (`#1D4ED8`). This was chosen for its professional, trustworthy feel in an admin context.
+The primary colour is `amber-500` (`#F59E0B`). This was chosen to give the
+portal a warm, distinctive identity that feels appropriate for a food-oriented
+business context, while remaining professional and legible across all components.
 
-If the brand identity shifts toward a warmer, more pizza-themed palette (amber/orange), the change is **two lines** in `tokens.css`:
+The sidebar uses its own dedicated token set (`--sidebar-*`) so it can be
+restyled independently of the page-level primary if needed.
+
+If a future tenant's brand identity requires a different primary accent,
+the change is **two lines** in `tokens.css`:
 
 ```css
 /* Change this: */
---primary:       29  78  216;   /* blue-700 */
---primary-hover: 30  64  175;   /* blue-800 */
+--primary:       245 158 11;    /* amber-500 */
+--primary-hover: 217 119 6;     /* amber-600 */
 
-/* To this: */
---primary:       217 119 6;     /* amber-600 */
---primary-hover: 180 83  9;     /* amber-700 */
+/* To this (example — blue): */
+--primary:       59  130 246;   /* blue-500 */
+--primary-hover: 37  99  235;   /* blue-600 */
 ```
 
-Every button, link, focus ring, active nav item, and primary interactive element in the entire application updates automatically. No component files need to change.
+The sidebar accent can be updated separately if the sidebar chrome should
+also follow the brand colour:
 
-This is the core value proposition of a token-based colour system.
+```css
+--sidebar-accent:      245 158 11;   /* change to match new primary if desired */
+--sidebar-active-text: 252 211 77;   /* adjust to a lighter shade of new accent */
+```
+
+Every button, link, focus ring, and active nav item updates automatically.
+No component files need to change.

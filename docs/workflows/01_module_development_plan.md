@@ -18,6 +18,7 @@
 - [8. GitHub Issue Templates by Module](#8-github-issue-templates-by-module)
 - [9. Living Document — How to Keep This Updated](#9-living-document--how-to-keep-this-updated)
 - [10. Changelog](#10-changelog)
+
 ## 1. Current State
 
 | Phase | Status |
@@ -61,7 +62,7 @@ data or having to retrofit dependencies later.
 This is the exact sequence followed for every module, every time. No steps
 are skipped. No steps are reordered.
 
-```
+```text
 Step 1 → Feature Architecture (Claude Web)
 Step 2 → CDS Component Pre-Check
 Step 3 → HTML Mockup — screen by screen (Claude Web)
@@ -113,6 +114,7 @@ Architecture document and check it against what exists in
 `apps/admin/src/components/ui/` and `apps/admin/src/components/shared/`.
 
 For each component required by this module:
+
 - ✅ Already built — proceed
 - 🔨 Missing — build it before starting implementation
 
@@ -134,6 +136,7 @@ HTML mockup. Screens are reviewed and approved individually before moving to
 the next.
 
 Each mockup shows:
+
 - Exact layout, component placement, and spacing
 - Real-looking data (not lorem ipsum — use realistic pizza shop data)
 - All interactive states visible: empty state, loaded state, loading skeleton
@@ -256,6 +259,8 @@ Before closing out the module:
 - Update the **Current State** section in this document (Section 1) to
   reflect the completed module
 - Update `CLAUDE.md` — move the module from "In Progress" to "Complete"
+- If any design token decisions were made during this module's mockup
+  sessions, add them to .claude/decisions/design-tokens.md
 
 ## 4. CDS Component Strategy
 
@@ -497,6 +502,7 @@ docs/workflows/                   — Module development and daily workflows
 ### Repository Setup
 
 The Git repository was initialised during scaffold with two branches:
+
 - `main` — production-ready code only
 - `develop` — integration branch; all feature branches merge here
 
@@ -1002,18 +1008,22 @@ Ref: modules/notifications/FEATURE_ARCH.md
 This document must stay current as modules are completed. After each module:
 
 **In this document:**
+
 - Move the module from "In Progress" to "Completed Modules" in Section 1
 - Update the completion date
 
 **In CLAUDE.md:**
+
 - Move the module from "In Progress" to "Completed Modules"
 - Remove it from "Not Started"
 
 **In GitHub:**
+
 - Close all issues for the milestone
 - Mark the milestone as complete
 
 **In the repo:**
+
 - The `FEATURE_ARCH.md` for a completed module stays in place permanently —
   it serves as documentation of what was built and why
 

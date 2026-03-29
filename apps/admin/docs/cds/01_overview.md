@@ -210,11 +210,12 @@ Retrofitting accessibility is significantly more expensive than building it in. 
 | Accessibility commitment | WCAG 2.1 AA from day one | NFR requirement; retrofitting is expensive |
 | Styling system | Tailwind CSS 4 + CSS custom properties | Token-based theming, no config file required |
 | Icon library | Lucide React | Tree-shakeable, consistent stroke style |
-| Theme | Warm & approachable + classic admin feel | Professional, functional, not fatiguing for all-day use |
-| Primary colour | `blue-700` — `#1D4ED8` | Trust, professionalism; shiftable to amber later via token |
+| Primary colour | `amber-500` — `#F59E0B` | Warm, distinctive; suits food-oriented context; token-swappable per tenant |
+| Theme | Warm graphite sidebar + amber accent | Dark purple-grey sidebar chrome, amber active states, white content area |
+| Sidebar palette | Custom `--sidebar-*` token set | Six dedicated tokens independent of page-level primary; always dark |
 | Dark mode | Both light and dark; light is default | Staff comfort; required by NFR |
 | Typography | Geist via `next/font` | Modern, clean; self-hosted, zero layout shift |
-| Body text size | 13px sm / 15px base — compact scale | Data-dense admin UI; consistent with Linear, Vercel, GitHub |
+| Body text size | 15px sm / 17px base — comfortable scale | Revised during Module 1 mockup — portal aesthetic needs more weight than a developer tool |
 | Border radius | Subtle — `sm` 4px, `md` 6px, `lg` 8px | Slightly softened, professional; not sharp, not bubbly |
 | Button loading width | Maintains original width | No layout shift during async actions |
 | IconButton | Separate component from Button | Different shape (square), different usage context |

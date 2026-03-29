@@ -1,103 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mockup — Login Page | Module 01 Auth</title>
+  </head>
+  <body>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --font: -apple-system, 'Segoe UI', system-ui, sans-serif;
+        --fs-xs: 13px;
+        --fs-sm: 15px;
+        --fs-xl: 22px;
+        --primary: #f59e0b;
+        --primary-h: #d97706;
+        --radius-md: 6px;
+        --radius-lg: 8px;
+      }
+      body {
+        background: #f9f8f7;
+      }
+      .root {
+        font-family: var(--font);
+        font-size: var(--fs-sm);
+      }
+      .login-screen {
+        background: #f9f8f7;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        flex-direction: column;
+      }
+      .login-card {
+        background: #fff;
+        border: 0.5px solid #e5e3e0;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        padding: 2.5rem;
+      }
+      .login-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 2rem;
+      }
+      .login-logo-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .login-logo-mark svg {
+        width: 17px;
+        height: 17px;
+        stroke: #fff;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+      }
+      .login-logo-title {
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        color: #1c1917;
+      }
+      .login-logo-sub {
+        font-size: var(--fs-xs);
+        color: #78716c;
+      }
+      .login-heading {
+        font-size: var(--fs-xl);
+        font-weight: 600;
+        color: #1c1917;
+        margin-bottom: 4px;
+      }
+      .login-sub {
+        font-size: var(--fs-xs);
+        color: #78716c;
+        margin-bottom: 1.75rem;
+      }
+      .field {
+        margin-bottom: 1.1rem;
+      }
+      .field-label {
+        display: block;
+        font-size: var(--fs-xs);
+        font-weight: 500;
+        color: #1c1917;
+        margin-bottom: 6px;
+      }
+      .req {
+        color: #dc2626;
+        margin-left: 2px;
+      }
+      .field-input {
+        width: 100%;
+        height: 42px;
+        border: 0.5px solid #d1cec8;
+        border-radius: var(--radius-md);
+        padding: 0 12px;
+        font-size: var(--fs-sm);
+        color: #1c1917;
+        background: #fff;
+        font-family: var(--font);
+      }
+      .field-input.err {
+        border-color: #dc2626;
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+      }
+      .field-input-wrap {
+        position: relative;
+      }
+      .field-eye {
+        position: absolute;
+        right: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        display: flex;
+        cursor: pointer;
+      }
+      .field-eye svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.75;
+      }
+      .field-error {
+        font-size: var(--fs-xs);
+        color: #dc2626;
+        margin-top: 5px;
+      }
+      .login-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        height: 42px;
+        margin-top: 4px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-md);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font);
+      }
+      .login-btn:hover {
+        background: var(--primary-h);
+      }
+      .login-btn.loading {
+        opacity: 0.85;
+      }
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .error-banner {
+        background: #fef2f2;
+        border: 0.5px solid #fecaca;
+        border-radius: var(--radius-md);
+        padding: 11px 13px;
+        font-size: var(--fs-xs);
+        color: #991b1b;
+        margin-bottom: 1.1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+      }
+      .error-banner svg {
+        width: 15px;
+        height: 15px;
+        stroke: #dc2626;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .state-tabs {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 14px;
+      }
+      .state-tab {
+        font-size: 12px;
+        padding: 5px 11px;
+        border-radius: 99px;
+        border: 0.5px solid #d1d5db;
+        cursor: pointer;
+        color: #6b7280;
+        background: #fff;
+        white-space: nowrap;
+        font-family: var(--font);
+      }
+      .state-tab.on {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .hint {
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        margin-top: 8px;
+        font-family: var(--font);
+      }
+    </style>
 
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --font: -apple-system, 'Segoe UI', system-ui, sans-serif;
-    --fs-xs: 13px; --fs-sm: 15px; --fs-xl: 22px;
-    --primary: #f59e0b; --primary-h: #d97706;
-    --radius-md: 6px; --radius-lg: 8px;
-  }
-  .root { font-family: var(--font); font-size: var(--fs-sm); }
-  .login-screen { background: #f9f8f7; min-height: 560px; display: flex; align-items: center; justify-content: center; padding: 2rem; flex-direction: column; }
-  .login-card { background: #fff; border: 0.5px solid #e5e3e0; border-radius: 12px; width: 100%; max-width: 400px; padding: 2.5rem; }
-  .login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 2rem; }
-  .login-logo-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .login-logo-mark svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; }
-  .login-logo-title { font-size: var(--fs-sm); font-weight: 600; color: #1c1917; }
-  .login-logo-sub { font-size: var(--fs-xs); color: #78716c; }
-  .login-heading { font-size: var(--fs-xl); font-weight: 600; color: #1c1917; margin-bottom: 4px; }
-  .login-sub { font-size: var(--fs-xs); color: #78716c; margin-bottom: 1.75rem; }
-  .field { margin-bottom: 1.1rem; }
-  .field-label { display: block; font-size: var(--fs-xs); font-weight: 500; color: #1c1917; margin-bottom: 6px; }
-  .req { color: #dc2626; margin-left: 2px; }
-  .field-input { width: 100%; height: 42px; border: 0.5px solid #d1cec8; border-radius: var(--radius-md); padding: 0 12px; font-size: var(--fs-sm); color: #1c1917; background: #fff; font-family: var(--font); }
-  .field-input.err { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,.10); }
-  .field-input-wrap { position: relative; }
-  .field-eye { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: #9ca3af; display: flex; cursor: pointer; }
-  .field-eye svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.75; }
-  .field-error { font-size: var(--fs-xs); color: #dc2626; margin-top: 5px; }
-  .login-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 42px; margin-top: 4px; background: var(--primary) !important; color: #fff !important; border: none !important; border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 600; cursor: pointer; font-family: var(--font); }
-  .login-btn:hover { background: var(--primary-h) !important; }
-  .login-btn.loading { opacity: .85; }
-  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .error-banner { background: #fef2f2; border: 0.5px solid #fecaca; border-radius: var(--radius-md); padding: 11px 13px; font-size: var(--fs-xs); color: #991b1b; margin-bottom: 1.1rem; display: flex; align-items: flex-start; gap: 9px; }
-  .error-banner svg { width: 15px; height: 15px; stroke: #dc2626; fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; margin-top: 1px; }
-  .state-tabs { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
-  .state-tab { font-size: 12px; padding: 5px 11px; border-radius: 99px; border: 0.5px solid #d1d5db; cursor: pointer; color: #6b7280; background: #fff; white-space: nowrap; font-family: var(--font); }
-  .state-tab.on { background: var(--primary); color: #fff; border-color: var(--primary); }
-  .hint { font-size: 12px; color: #9ca3af; text-align: center; margin-top: 8px; font-family: var(--font); }
-</style>
-<div class="root">
-<div class="login-screen">
-  <div class="login-card">
-    <div class="login-logo">
-      <div class="login-logo-mark"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <div><div class="login-logo-title">Admin Portal</div><div class="login-logo-sub">Pizza Palace Praha</div></div>
+    <div class="root">
+      <div class="login-screen">
+        <div class="login-card">
+          <div class="login-logo">
+            <div class="login-logo-mark">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div>
+              <div class="login-logo-title">Admin Portal</div>
+              <div class="login-logo-sub">Pizza Palace Praha</div>
+            </div>
+          </div>
+
+          <!-- DEFAULT -->
+          <div id="ls-default">
+            <div class="login-heading">Sign in to your account</div>
+            <div class="login-sub">Enter your credentials to continue</div>
+            <div class="field">
+              <label class="field-label">Email <span class="req">*</span></label>
+              <input
+                class="field-input"
+                type="text"
+                placeholder="jan@pizzapalace.cz"
+                readonly
+                style="color: #9ca3af"
+              />
+            </div>
+            <div class="field">
+              <label class="field-label">Password <span class="req">*</span></label>
+              <div class="field-input-wrap">
+                <input
+                  class="field-input"
+                  type="password"
+                  value="password"
+                  readonly
+                  style="padding-right: 38px"
+                />
+                <span class="field-eye"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" /></svg
+                ></span>
+              </div>
+            </div>
+            <button class="login-btn">Sign In</button>
+          </div>
+
+          <!-- LOADING -->
+          <div id="ls-loading" style="display: none">
+            <div class="login-heading">Sign in to your account</div>
+            <div class="login-sub">Enter your credentials to continue</div>
+            <div class="field">
+              <label class="field-label">Email <span class="req">*</span></label>
+              <input class="field-input" type="text" value="jan@pizzapalace.cz" readonly />
+            </div>
+            <div class="field">
+              <label class="field-label">Password <span class="req">*</span></label>
+              <div class="field-input-wrap">
+                <input
+                  class="field-input"
+                  type="password"
+                  value="password"
+                  readonly
+                  style="padding-right: 38px"
+                />
+                <span class="field-eye"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" /></svg
+                ></span>
+              </div>
+            </div>
+            <button class="login-btn loading" disabled>
+              <span class="spinner"></span>
+              Signing in...
+            </button>
+          </div>
+
+          <!-- VALIDATION -->
+          <div id="ls-validation" style="display: none">
+            <div class="login-heading">Sign in to your account</div>
+            <div class="login-sub">Enter your credentials to continue</div>
+            <div class="field">
+              <label class="field-label">Email <span class="req">*</span></label>
+              <input class="field-input err" type="text" value="notanemail" readonly />
+              <div class="field-error">Please enter a valid email address.</div>
+            </div>
+            <div class="field">
+              <label class="field-label">Password <span class="req">*</span></label>
+              <div class="field-input-wrap">
+                <input class="field-input err" type="text" placeholder="Required" readonly />
+              </div>
+              <div class="field-error">Password is required.</div>
+            </div>
+            <button class="login-btn">Sign In</button>
+          </div>
+
+          <!-- ERROR CREDENTIALS -->
+          <div id="ls-error-creds" style="display: none">
+            <div class="login-heading">Sign in to your account</div>
+            <div class="login-sub">Enter your credentials to continue</div>
+            <div class="error-banner">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Invalid email or password.
+            </div>
+            <div class="field">
+              <label class="field-label">Email <span class="req">*</span></label>
+              <input class="field-input err" type="text" value="jan@pizzapalace.cz" readonly />
+            </div>
+            <div class="field">
+              <label class="field-label">Password <span class="req">*</span></label>
+              <div class="field-input-wrap">
+                <input
+                  class="field-input err"
+                  type="password"
+                  value="password"
+                  readonly
+                  style="padding-right: 38px"
+                />
+                <span class="field-eye"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" /></svg
+                ></span>
+              </div>
+            </div>
+            <button class="login-btn">Sign In</button>
+          </div>
+
+          <!-- ERROR ACCOUNT -->
+          <div id="ls-error-account" style="display: none">
+            <div class="login-heading">Sign in to your account</div>
+            <div class="login-sub">Enter your credentials to continue</div>
+            <div class="error-banner">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Your account has been deactivated or does not exist. Please contact your
+              administrator.
+            </div>
+            <div class="field">
+              <label class="field-label">Email <span class="req">*</span></label>
+              <input class="field-input" type="text" value="jan@pizzapalace.cz" readonly />
+            </div>
+            <div class="field">
+              <label class="field-label">Password <span class="req">*</span></label>
+              <div class="field-input-wrap">
+                <input
+                  class="field-input"
+                  type="password"
+                  value="password"
+                  readonly
+                  style="padding-right: 38px"
+                />
+                <span class="field-eye"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" /></svg
+                ></span>
+              </div>
+            </div>
+            <button class="login-btn">Sign In</button>
+          </div>
+        </div>
+
+        <div class="state-tabs">
+          <span class="state-tab on" onclick="ls('default', this)">Default</span>
+          <span class="state-tab" onclick="ls('loading', this)">Loading</span>
+          <span class="state-tab" onclick="ls('validation', this)">Validation</span>
+          <span class="state-tab" onclick="ls('error-creds', this)">Wrong credentials</span>
+          <span class="state-tab" onclick="ls('error-account', this)">Account blocked</span>
+        </div>
+        <div class="hint">Click tabs to preview all states</div>
+      </div>
     </div>
-    <!-- DEFAULT -->
-    <div id="ls-default">
-      <div class="login-heading">Sign in to your account</div>
-      <div class="login-sub">Enter your credentials to continue</div>
-      <div class="field"><label class="field-label">Email <span class="req">*</span></label><input class="field-input" type="text" placeholder="jan@pizzapalace.cz" readonly style="color:#9ca3af;" /></div>
-      <div class="field"><label class="field-label">Password <span class="req">*</span></label><div class="field-input-wrap"><input class="field-input" type="password" value="password" readonly style="padding-right:38px;" /><span class="field-eye"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span></div></div>
-      <button class="login-btn">Sign In</button>
-    </div>
-    <!-- LOADING -->
-    <div id="ls-loading" style="display:none;">
-      <div class="login-heading">Sign in to your account</div>
-      <div class="login-sub">Enter your credentials to continue</div>
-      <div class="field"><label class="field-label">Email <span class="req">*</span></label><input class="field-input" type="text" value="jan@pizzapalace.cz" readonly /></div>
-      <div class="field"><label class="field-label">Password <span class="req">*</span></label><div class="field-input-wrap"><input class="field-input" type="password" value="password" readonly style="padding-right:38px;" /><span class="field-eye"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span></div></div>
-      <button class="login-btn loading" disabled><span class="spinner"></span>Signing in...</button>
-    </div>
-    <!-- VALIDATION -->
-    <div id="ls-validation" style="display:none;">
-      <div class="login-heading">Sign in to your account</div>
-      <div class="login-sub">Enter your credentials to continue</div>
-      <div class="field"><label class="field-label">Email <span class="req">*</span></label><input class="field-input err" type="text" value="notanemail" readonly /><div class="field-error">Please enter a valid email address.</div></div>
-      <div class="field"><label class="field-label">Password <span class="req">*</span></label><div class="field-input-wrap"><input class="field-input err" type="text" placeholder="Required" readonly /></div><div class="field-error">Password is required.</div></div>
-      <button class="login-btn">Sign In</button>
-    </div>
-    <!-- ERROR CREDENTIALS -->
-    <div id="ls-error-creds" style="display:none;">
-      <div class="login-heading">Sign in to your account</div>
-      <div class="login-sub">Enter your credentials to continue</div>
-      <div class="error-banner"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Invalid email or password.</div>
-      <div class="field"><label class="field-label">Email <span class="req">*</span></label><input class="field-input err" type="text" value="jan@pizzapalace.cz" readonly /></div>
-      <div class="field"><label class="field-label">Password <span class="req">*</span></label><div class="field-input-wrap"><input class="field-input err" type="password" value="password" readonly style="padding-right:38px;" /><span class="field-eye"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span></div></div>
-      <button class="login-btn">Sign In</button>
-    </div>
-    <!-- ERROR ACCOUNT -->
-    <div id="ls-error-account" style="display:none;">
-      <div class="login-heading">Sign in to your account</div>
-      <div class="login-sub">Enter your credentials to continue</div>
-      <div class="error-banner"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Your account has been deactivated or does not exist. Please contact your administrator.</div>
-      <div class="field"><label class="field-label">Email <span class="req">*</span></label><input class="field-input" type="text" value="jan@pizzapalace.cz" readonly /></div>
-      <div class="field"><label class="field-label">Password <span class="req">*</span></label><div class="field-input-wrap"><input class="field-input" type="password" value="password" readonly style="padding-right:38px;" /><span class="field-eye"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span></div></div>
-      <button class="login-btn">Sign In</button>
-    </div>
-  </div>
-  <div class="state-tabs">
-    <span class="state-tab on" onclick="ls('default',this)">Default</span>
-    <span class="state-tab" onclick="ls('loading',this)">Loading</span>
-    <span class="state-tab" onclick="ls('validation',this)">Validation</span>
-    <span class="state-tab" onclick="ls('error-creds',this)">Wrong credentials</span>
-    <span class="state-tab" onclick="ls('error-account',this)">Account blocked</span>
-  </div>
-  <div class="hint">Click tabs to preview all states</div>
-</div>
-</div>
-<script>
-function ls(s,el){ document.querySelectorAll('[id^="ls-"]').forEach(function(n){n.style.display='none';}); document.getElementById('ls-'+s).style.display='block'; document.querySelectorAll('.state-tab').forEach(function(t){t.classList.remove('on');}); el.classList.add('on'); }
-</script>
+
+    <script>
+      function ls(s, el) {
+        document.querySelectorAll('[id^="ls-"]').forEach(function (n) {
+          n.style.display = 'none';
+        });
+        document.getElementById('ls-' + s).style.display = 'block';
+        document.querySelectorAll('.state-tab').forEach(function (t) {
+          t.classList.remove('on');
+        });
+        el.classList.add('on');
+      }
+    </script>
+  </body>
+</html>
